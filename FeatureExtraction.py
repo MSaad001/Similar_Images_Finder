@@ -8,8 +8,6 @@ from numpy.linalg import norm
 # from tqdm import tqdm
 # import pickle
 
-
-
 model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 model.trainable = False
 
