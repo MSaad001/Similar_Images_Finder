@@ -1,4 +1,5 @@
-import tensorflow
+# import tensorflow as tf
+from keras.models import Sequential
 from keras.applications.resnet50 import ResNet50, preprocess_input
 from keras.layers import GlobalMaxPooling2D
 import cv2
@@ -10,14 +11,13 @@ from sklearn.neighbors import NearestNeighbors
 filename = np.array(pickle.load(open("filenames.pkl", "rb")))
 feature_list = pickle.load(open("featureVector.pkl", "rb"))
 
-model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-model.trainable = False
+base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+base_model.trainable = False
 
-model = tensorflow.keras.Sequential([
-    model,
+model = Sequential([
+    base_model,
     GlobalMaxPooling2D()
 ])
-model.summary()
 
 img = cv2.imread("1543.jpg")
 img = cv2.resize(img, (224, 224))

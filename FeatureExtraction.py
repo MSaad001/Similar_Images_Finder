@@ -1,23 +1,25 @@
-import tensorflow
+# import tensorflow as tf
 from keras.applications.resnet50 import ResNet50, preprocess_input
 from keras.layers import GlobalMaxPooling2D
+from keras.models import Sequential
 import cv2
 import numpy as np
 from numpy.linalg import norm
+
 # import os
 # from tqdm import tqdm
 # import pickle
 
-model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-model.trainable = False
+base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
+base_model.trainable = False
 
-model = tensorflow.keras.Sequential([
-    model,
+model = Sequential([
+    base_model,
     GlobalMaxPooling2D()
 ])
-model.summary()
+# base_model.summary()
 
-img = cv2.imread("123.jpg")
+img = cv2.imread("1543.jpg")
 img = cv2.resize(img, (224, 224))
 img = np.array(img)
 # print(img.shape)
