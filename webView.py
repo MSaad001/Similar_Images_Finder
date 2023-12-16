@@ -10,6 +10,7 @@ from keras.applications.resnet50 import ResNet50, preprocess_input
 from sklearn.neighbors import NearestNeighbors
 from numpy.linalg import norm
 import cv2
+import shutil
 
 feature_list = np.array(pickle.load(open('featureVector.pkl', 'rb')))
 filenames = pickle.load(open('filenames.pkl', 'rb'))
@@ -29,6 +30,10 @@ def save_uploaded_file(uploaded_file1):
     try:
         with open(os.path.join('uploads', uploaded_file1.name), 'wb') as f:
             f.write(uploaded_file1.getbuffer())
+
+        # copy the uploaded file to dataset directory
+        destination_path = os.path.join('Dataset', uploaded_file1.name)
+        shutil.copy(os.path.join('uploads', uploaded_file1.name), destination_path)
         return 1
     except:
         return 0
