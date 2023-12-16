@@ -99,5 +99,4 @@ if uploaded_file is not None:
                     st.image(filenames[indices[0][4]])
                 with col6:
                     st.image(filenames[indices[0][5]])
-    else:
-        st.header("Upload Failed")
+
